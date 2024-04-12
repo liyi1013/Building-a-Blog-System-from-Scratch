@@ -1,6 +1,6 @@
 create schema blog;
 
-
+DROP TABLE IF EXISTS article;
 create table article
 (
     id        int auto_increment comment 'id',
