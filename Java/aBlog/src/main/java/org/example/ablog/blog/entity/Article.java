@@ -1,4 +1,4 @@
-package blog.entity;
+package org.example.ablog.blog.entity;
 
 
 public class Article {
