@@ -23,4 +23,9 @@ public class controller {
         return ""+res;
     }
 
+    @GetMapping(value = "getAll")
+    public String getAll(){
+        return articleService.getAll().toString();
+    }
+
 }

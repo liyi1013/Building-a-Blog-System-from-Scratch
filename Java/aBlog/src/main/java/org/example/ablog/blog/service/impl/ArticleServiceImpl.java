@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
 @Service
 public class ArticleServiceImpl implements ArticleService {
 
@@ -17,6 +20,11 @@ public class ArticleServiceImpl implements ArticleService {
         int res =  jdbcTemplate.update("insert into article(title,content,author,add_date,pub_date,is_delete) values(?,?,?,?,?,?)",title,content,author,new java.sql.Timestamp(System.currentTimeMillis()),new java.sql.Timestamp(System.currentTimeMillis()),0);
         System.out.println("create create = "+res);
         return res;
+    }
+
+    @Override
+    public List<Map<String, Object>> getAll(){
+        return jdbcTemplate.queryForList("select * from article where is_delete = 0");
     }
 
 }
