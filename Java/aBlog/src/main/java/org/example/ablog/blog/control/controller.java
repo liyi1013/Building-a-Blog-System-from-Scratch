@@ -35,4 +35,9 @@ public class controller {
     public List<Article> getAllArticle(){
         return articleService.getAllArticle();
     }
+
+    @GetMapping(value = "getAllArticlePlus")
+    public List<Article> getAllArticlePlus(){
+        return articleService.getAllArticlePlus();
+    }
 }

@@ -12,4 +12,6 @@ public interface ArticleService {
     public List<Map<String, Object>> getAll();
 
     public List<Article> getAllArticle();
+
+    public List<Article> getAllArticlePlus();
 }

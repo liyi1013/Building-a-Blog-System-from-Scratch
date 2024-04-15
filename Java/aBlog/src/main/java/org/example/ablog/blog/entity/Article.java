@@ -1,6 +1,9 @@
 package org.example.ablog.blog.entity;
 
 
+import com.baomidou.mybatisplus.annotation.TableName;
+
+@TableName("article")
 public class Article {
 
   private long id;

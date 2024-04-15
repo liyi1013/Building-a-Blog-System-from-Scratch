@@ -3,6 +3,7 @@ package org.example.ablog.blog.service.impl;
 import jakarta.annotation.Resource;
 import org.example.ablog.blog.dao.ArticleDao;
 import org.example.ablog.blog.entity.Article;
+import org.example.ablog.blog.mapper.ArticleMapperPlus;
 import org.example.ablog.blog.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -47,4 +48,13 @@ public class ArticleServiceImpl implements ArticleService {
 //        });
         return articleDao.getAll();
     }
+
+    @Resource
+    private ArticleMapperPlus articleMapperPlus;
+
+    @Override
+    public List<Article> getAllArticlePlus(){
+        return articleMapperPlus.selectList(null);
+    }
+
 }
