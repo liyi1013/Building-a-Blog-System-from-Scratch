@@ -20,22 +20,25 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Resource
     private ArticleDao articleDao;
+    @Resource
+    private ArticleMapperPlus articleMapperPlus;
+
     @Override
-    public int create(String title,String content,String author){
+    public int create(String title, String content, String author) {
         System.out.println("start create create  ");
 //        int res =  jdbcTemplate.update("insert into article(title,content,author,add_date,pub_date,is_delete) values(?,?,?,?,?,?)",title,content,author,new java.sql.Timestamp(System.currentTimeMillis()),new java.sql.Timestamp(System.currentTimeMillis()),0);
         int res = articleDao.create(title, content, author);
-        System.out.println("create create = "+res);
+        System.out.println("create create = " + res);
         return res;
     }
 
     @Override
-    public List<Map<String, Object>> getAll(){
+    public List<Map<String, Object>> getAll() {
         return jdbcTemplate.queryForList("select * from article where is_delete = 0");
     }
 
     @Override
-    public List<Article> getAllArticle(){
+    public List<Article> getAllArticle() {
 //        return jdbcTemplate.query("select * from article where is_delete = 0", (rs, rowNum) -> {
 //            Article article = new Article();
 //            article.setId(rs.getLong("id"));
@@ -49,12 +52,23 @@ public class ArticleServiceImpl implements ArticleService {
         return articleDao.getAll();
     }
 
-    @Resource
-    private ArticleMapperPlus articleMapperPlus;
+    @Override
+    public List<Article> getAllArticlePlus() {
+        return articleMapperPlus.selectList(null);
+    }
 
     @Override
-    public List<Article> getAllArticlePlus(){
-        return articleMapperPlus.selectList(null);
+    public int insertArticle(String title, String content, String author) {
+        Article article = new Article();
+        article.setTitle(title);
+        article.setAuthor(author);
+        article.setContent(content);
+        java.sql.Timestamp timestamp = new java.sql.Timestamp(System.currentTimeMillis());
+        article.setAddDate(timestamp);
+        article.setPubDate(timestamp);
+        article.setIsDelete(0);
+        int insert = articleMapperPlus.insert(article);
+        return insert;
     }
 
 }

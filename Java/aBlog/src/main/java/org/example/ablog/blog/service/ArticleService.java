@@ -14,4 +14,6 @@ public interface ArticleService {
     public List<Article> getAllArticle();
 
     public List<Article> getAllArticlePlus();
+
+    public int insertArticle(String title, String content, String author);
 }

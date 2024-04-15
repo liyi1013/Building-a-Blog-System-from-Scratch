@@ -1,12 +1,15 @@
 package org.example.ablog.blog.entity;
 
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 @TableName("article")
 public class Article {
 
-  private long id;
+  @TableId(value = "id",type = IdType.AUTO)
+  private Integer id;
   private String title;
   private String content;
   private String author;
@@ -15,11 +18,11 @@ public class Article {
   private long isDelete;
 
 
-  public long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 

@@ -40,4 +40,9 @@ public class controller {
     public List<Article> getAllArticlePlus(){
         return articleService.getAllArticlePlus();
     }
+
+    @GetMapping(value = "insertArticle")
+    public int insertArticle(String title, String content, String author){
+        return articleService.insertArticle(title,content,author);
+    }
 }
