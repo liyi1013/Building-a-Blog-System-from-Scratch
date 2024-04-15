@@ -1,5 +1,6 @@
 package org.example.ablog.blog.service.impl;
 
+import org.example.ablog.blog.entity.Article;
 import org.example.ablog.blog.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -27,4 +28,17 @@ public class ArticleServiceImpl implements ArticleService {
         return jdbcTemplate.queryForList("select * from article where is_delete = 0");
     }
 
+    @Override
+    public List<Article> getAllArticle(){
+        return jdbcTemplate.query("select * from article where is_delete = 0", (rs, rowNum) -> {
+            Article article = new Article();
+            article.setId(rs.getLong("id"));
+            article.setTitle(rs.getString("title"));
+            article.setAuthor(rs.getString("author"));
+            article.setContent(rs.getString("content"));
+            article.setAddDate(rs.getTimestamp("add_date"));
+            article.setPubDate(rs.getTimestamp("pub_date"));
+            return article;
+        });
+    }
 }
