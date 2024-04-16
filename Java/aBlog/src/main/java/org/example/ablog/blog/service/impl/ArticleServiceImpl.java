@@ -1,5 +1,12 @@
 package org.example.ablog.blog.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import jakarta.annotation.Resource;
 import org.example.ablog.blog.dao.ArticleDao;
 import org.example.ablog.blog.entity.Article;
@@ -71,4 +78,15 @@ public class ArticleServiceImpl implements ArticleService {
         return insert;
     }
 
+    // 分页查询Article
+    public IPage getArticleByPage(int pageNum, int pageSize,String titleLike) {
+        // 获取分页数据
+        IPage page = new Page(pageNum, pageSize);
+        LambdaQueryWrapper<Article> articleLambdaQueryWrapper = Wrappers.lambdaQuery(Article.class);
+        articleLambdaQueryWrapper
+                .eq(Article::getIsDelete,0)
+                .like(StringUtils.isNotBlank(titleLike),Article::getTitle,titleLike);
+        IPage page1 = articleMapperPlus.selectPage(page, articleLambdaQueryWrapper);
+        return page1;
+    }
 }

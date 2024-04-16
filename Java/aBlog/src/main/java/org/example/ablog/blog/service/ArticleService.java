@@ -1,5 +1,6 @@
 package org.example.ablog.blog.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.example.ablog.blog.entity.Article;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface ArticleService {
     public List<Article> getAllArticlePlus();
 
     public int insertArticle(String title, String content, String author);
+
+    public IPage getArticleByPage(int pageNum, int pageSize, String titleLike);
 }
