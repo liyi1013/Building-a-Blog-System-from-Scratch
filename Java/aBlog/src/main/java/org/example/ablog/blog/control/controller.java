@@ -1,6 +1,7 @@
 package org.example.ablog.blog.control;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import org.example.ablog.blog.config.MyConfig;
 import org.example.ablog.blog.entity.Article;
 import org.example.ablog.blog.service.ArticleService;
 import jakarta.annotation.Resource;
@@ -50,5 +51,13 @@ public class controller {
     @GetMapping(value = "getAllArticlePlusPages")
     public IPage getAllArticlePlusPages(int pageNum, int pageSize, String titleLike){
         return articleService.getArticleByPage(pageNum,pageSize,titleLike);
+    }
+
+    @Resource
+    MyConfig myConfig;
+
+    @GetMapping(value = "getMyConfigProperty")
+    public String getMyConfigproperty(){
+        return myConfig.getMyProperty().toString();
     }
 }
